@@ -27,7 +27,7 @@
             /*margin-right: 10px;*/
             height: 100%;
              border-width: 2px;
-            border-style: none solid none none;
+            border-style: none none none solid;
         }
         #control .logo-wrp{
             font-size: 30px;
