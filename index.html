@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <title>gcode viewer - online gcode viewer and analyzer in your browser!</title>
+    <title>Ethereal</title>
     <meta name="description" content="Visual GCode viewer and analyzer in your browser. No need to upload you GCode anywhere, everything is done locally." />
     <meta name="keywords" content="GCode,g-code,viewer,online,javascript" />
     <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
@@ -84,7 +84,7 @@
         <div class="container">
             <ul class="nav">
                 <li >
-                    <a class="brand" href="#">GCode Viewer</a>
+                    <a class="brand" href="#">Ethereal</a>
                 </li>
             </ul>
             <ul class="nav pull-right">
@@ -101,7 +101,7 @@
                         </li>
                         <li class="socials"><div class="fb-like" data-href="http://gcode.ws" data-send="false" data-layout="button_count" data-width="150" data-show-faces="true" data-action="recommend"></div></li>
                         <li class="socials"><a href="https://twitter.com/share" class="twitter-share-button" data-url="http://gcode.ws" data-text="Check out a nice online gcode viewer!">Tweet</a>
-                            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script></li>
+                           </li>
                     </ul>
                 </li>
             </ul>
@@ -111,9 +111,71 @@
 
 
 <div id="wrap" class="ui-widget ui-widget-content ui-corner-all">
-    <div id="control">
-        <img src="img/logo.png" alt="gCodeViewer - an online gcode viewer"/>
+    
+    <div id="gcode">
+        <div id="tabs-min" class="tabbable">
+            <div class="tab-wrp">
+                
+            </div>    
+            <ul id="myTab" class="nav nav-tabs">
+                    <li class=""><a href="#tab2d" data-toggle="tab">2D</a></li>
+                    <li class=""><a href="#tab3d" data-toggle="tab">3D</a></li>
+                    <li class=""><a href="#tabGCode" data-toggle="tab">GCode</a></li>
+                    <li class="active"><a href="#tabAbout" data-toggle="tab">About</a></li>
+                </ul>
+            <div class="tab-content">
+                <div class="tab-pane" id="tab2d">
+                    <canvas id="canvas" width="650" height="620"></canvas>
+                    <div id="slider-vertical"></div>
+                    <div id="slider-horizontal"></div>
+                </div>
+                <div class="tab-pane" id="tab3d">
+                    <div id="3d_container"></div>
+                </div>
+                <div class="tab-pane" id="tabGCode">
+                    <div id="gCodeContainer"></div>
+                </div>
+                <div class="tab-pane active" id="tabAbout">
+                    <div class="aboutpage">
+                        <h1>gCodeViewer</h1>
+                        <b>gCodeViewer</b> is a visual GCode visualizer, viewer and analyzer in your own browser! It works on any OS in almost any modern browser (chrome, ff, safari 6, opera, ie10 should work too). All you need to do - is drag your *.gcode file to the designated zone.<br /><br />
+                        Current features include:<br />
+                        <ul>
+                            <li>Visualize GCode in 2D, layer by layer
+                                <ul>
+                                    <li>Show retracts and restarts</li>
+                                    <li>Show print/move/retract speeds</li>
+                                    <li>Display only part of layer, animate sequence of layer printing</li>
+                                    <li>Show two layers simultaneously so you can check overhangs</li>
+                                    <li>Adjust line width to simulate print more closely</li>
+                                    <li><b>Gcode viewer will try to parse nozzle and filament diameters from gcode, but it may fail to do so. In that case you will need to set it manually in 'Printer Info' tab</b></li>
+                                </ul>
+                            </li>
+                            <li>Analyze GCode
+                                <ul>
+                                    <li>Print time, amount of plastic used, layer height, etc. for whole file and for single layer</li>
+                                    <li>Reference visualized part to GCode file (i.e. select a certain part of 2d visualization, switch to GCode view - it will highlight list of lines responsible for visualized piece)</li>
+                                </ul>
+                            </li>
+                            <li>Multiplatform, available online (but works offline too), works locally (doesn't upload you g-code anywhere or download anything but application itself)</li>
+                            <li>3D visualization (I don't know what for, it's dull and useless.. need to rewrite it from scratch)</li>
+                            <li>And yeah, it's slow, memory hungry and only supports modern browsers</li>
+                            <li>Totally open source so you can use it as you like</li>
+                        </ul>
+                        <br /><br />
+                        All sources are available at <a href="https://github.com/hudbrog/gCodeViewer">https://github.com/hudbrog/gCodeViewer</a><br />
+                        If you find any bugs or have feature requests - don't hesitate to post them to <a href="https://github.com/hudbrog/gCodeViewer/issues">https://github.com/hudbrog/gCodeViewer/issues</a><br />
+                        And I would appreciate if you like it on Thingiverse page: <a href="http://www.thingiverse.com/thing:35248">http://www.thingiverse.com/thing:35248</a><br />
+                    </div>
 
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="control">
+        <div class='logo-wrp'>
+            Ethereal
+        </div>
         <div id="accordion2" class="accordion">
             <div class="accordion-group">
                 <div class="accordion-heading">
@@ -252,65 +314,6 @@
 
         </div>
         <output id="errorList"></output>
-
-
-    </div>
-    <div id="gcode">
-        <div id="tabs-min" class="tabbable">
-            <ul id="myTab" class="nav nav-tabs">
-                <li class=""><a href="#tab2d" data-toggle="tab">2D</a></li>
-                <li class=""><a href="#tab3d" data-toggle="tab">3D</a></li>
-                <li class=""><a href="#tabGCode" data-toggle="tab">GCode</a></li>
-                <li class="active"><a href="#tabAbout" data-toggle="tab">About</a></li>
-            </ul>
-            <div class="tab-content">
-                <div class="tab-pane" id="tab2d">
-                    <canvas id="canvas" width="650" height="620"></canvas>
-                    <div id="slider-vertical"></div>
-                    <div id="slider-horizontal"></div>
-                </div>
-                <div class="tab-pane" id="tab3d">
-                    <div id="3d_container"></div>
-                </div>
-                <div class="tab-pane" id="tabGCode">
-                    <div id="gCodeContainer"></div>
-                </div>
-                <div class="tab-pane active" id="tabAbout">
-                    <div class="aboutpage">
-                        <h1>gCodeViewer</h1>
-                        <b>gCodeViewer</b> is a visual GCode visualizer, viewer and analyzer in your own browser! It works on any OS in almost any modern browser (chrome, ff, safari 6, opera, ie10 should work too). All you need to do - is drag your *.gcode file to the designated zone.<br /><br />
-                        Current features include:<br />
-                        <ul>
-                            <li>Visualize GCode in 2D, layer by layer
-                                <ul>
-                                    <li>Show retracts and restarts</li>
-                                    <li>Show print/move/retract speeds</li>
-                                    <li>Display only part of layer, animate sequence of layer printing</li>
-                                    <li>Show two layers simultaneously so you can check overhangs</li>
-                                    <li>Adjust line width to simulate print more closely</li>
-                                    <li><b>Gcode viewer will try to parse nozzle and filament diameters from gcode, but it may fail to do so. In that case you will need to set it manually in 'Printer Info' tab</b></li>
-                                </ul>
-                            </li>
-                            <li>Analyze GCode
-                                <ul>
-                                    <li>Print time, amount of plastic used, layer height, etc. for whole file and for single layer</li>
-                                    <li>Reference visualized part to GCode file (i.e. select a certain part of 2d visualization, switch to GCode view - it will highlight list of lines responsible for visualized piece)</li>
-                                </ul>
-                            </li>
-                            <li>Multiplatform, available online (but works offline too), works locally (doesn't upload you g-code anywhere or download anything but application itself)</li>
-                            <li>3D visualization (I don't know what for, it's dull and useless.. need to rewrite it from scratch)</li>
-                            <li>And yeah, it's slow, memory hungry and only supports modern browsers</li>
-                            <li>Totally open source so you can use it as you like</li>
-                        </ul>
-                        <br /><br />
-                        All sources are available at <a href="https://github.com/hudbrog/gCodeViewer">https://github.com/hudbrog/gCodeViewer</a><br />
-                        If you find any bugs or have feature requests - don't hesitate to post them to <a href="https://github.com/hudbrog/gCodeViewer/issues">https://github.com/hudbrog/gCodeViewer/issues</a><br />
-                        And I would appreciate if you like it on Thingiverse page: <a href="http://www.thingiverse.com/thing:35248">http://www.thingiverse.com/thing:35248</a><br />
-                    </div>
-
-                </div>
-            </div>
-        </div>
     </div>
 </div>
 <script>
