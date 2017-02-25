@@ -25,7 +25,9 @@
             margin-left: 10px;
             /*background:#ffffff;*/
             /*margin-right: 10px;*/
-            /*height: 680px;*/
+            height: 100%;
+             border-width: 2px;
+            border-style: none solid none none;
         }
         #control .logo-wrp{
             font-size: 30px;
@@ -203,7 +205,7 @@
             padding: 0px;
             vertical-align: top;
             border-width: 2px;
-            border-style: none solid none solid;
+            border-style: none none none solid;
         }
         .tab-wrp{
             display: table-cell;
